@@ -1,0 +1,11 @@
+FROM php:7-fpm
+
+RUN apt-get update && apt-get install -y zlib1g-dev zip unzip libmcrypt-dev \
+        && docker-php-ext-install mcrypt zip \
+        && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+        && useradd -m -s /bin/bash php \
+        && su php -c "composer global require 'laravel/installer'" \
+        && echo "PATH=$PATH:/home/php/.composer/vendor/bin" >> /home/php/.bashrc
+
+EXPOSE 8000
+WORKDIR /workspace
