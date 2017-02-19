@@ -5,12 +5,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Cluster Contacts</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
+        <link href="//fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <style>
             html, body {
                 background-color: #fff;
@@ -20,76 +19,38 @@
                 height: 100vh;
                 margin: 0;
             }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
         </style>
+
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+        <div class="container">
+        <h1> Contacts distribution </h1>
+        <div class="col-md-5 well">
+            <h3> Agents and Contacts </h3>
+            <form method="post">
+              {{ csrf_field() }}
+              <div class="form-group form-inline">
+                <label for="agent1Name">Agent1</label>
+                <input type="text" class="form-control" id="agent1Name" name="agent1Name" placeholder="Name">
+                </input>
+                <input type="number" class="form-control" id="agent1ZipCode" name="agent1ZipCode" placeholder="Zip Code">
+              </div>
+              <div class="form-group form-inline">
+                <label for="agent2Name">Agent2</label>
+                <input type="text" class="form-control" id="agent2Name" name="agent2Name" placeholder="Name">
+                <input type="number" class="form-control" id="agent2ZipCode" name="agent2ZipCode" placeholder="Zip Code">
+              </div>
+              <button type="submit" class="btn btn-default">Match</button>
+            </form>
+        </div>
+        <div class="col-md-7 well">
+            <h3> Contacts Distribution </h3>
+            <div class="form-group">
+              <label class="sr-only" for="distribution">Contacts distribution</label>
+              <textarea disabled class="form-control" rows="5" id="distribution">{{ $distribution }}
+              </textarea>
             </div>
+        </div>
         </div>
     </body>
 </html>

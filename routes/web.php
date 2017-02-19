@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'DistributionController@welcome');
+Route::post('/', 'DistributionController@distribute');
