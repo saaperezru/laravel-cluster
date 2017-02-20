@@ -23,3 +23,8 @@ To do so implement or choose your implementation of each interface and bind it a
 ```
 /app/Providers/AppServiceProvider.php
 ```
+If you decide to use Google's or ZipCodeApi's services you should add your api's keys to the .env file:
+```
+GOOGLE_KEY=<your key here>
+ZIPCODE_KEY=<your key here>
+```
