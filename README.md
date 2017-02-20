@@ -6,6 +6,7 @@ To deploy the application install docker in your machine and then run:
 $ docker build -f app.docker -t app:1.0 .
 $ docker run --rm -it --name app-container -p 8000:8000 -v $(pwd):/workspace app:1.0 /bin/bash
 # su php
+$ composer install
 $ cp .env.example .env
 $ mkdir bootstrap/cache
 $ php artisan config:clear
