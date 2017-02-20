@@ -6,6 +6,10 @@ To deploy the application install docker in your machine and then run:
 $ docker build -f app.docker -t app:1.0 .
 $ docker run --rm -it --name app-container -p 8000:8000 -v $(pwd):/workspace app:1.0 /bin/bash
 # su php
-$ php artisan serve --host="0.0.0.0"                                                                   
+$ cp .env.example .env
+$ mkdir bootstrap/cache
+$ php artisan config:clear
+$ php artisan key:generate
+$ php artisan serve --host="0.0.0.0"
 ```
 Then go to http://127.0.0.1:8000 inside your browser.

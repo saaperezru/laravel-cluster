@@ -25,29 +25,26 @@
     <body>
         <div class="container">
         <h1> Contacts distribution </h1>
-        <div class="col-md-5 well">
+        <div class="col-md-3 well">
             <h3> Agents and Contacts </h3>
             <form method="post">
               {{ csrf_field() }}
-              <div class="form-group form-inline">
+              <div class="form-group form-horizontal">
                 <label for="agent1Name">Agent1</label>
-                <input type="text" class="form-control" id="agent1Name" name="agent1Name" placeholder="Name">
-                </input>
                 <input type="number" class="form-control" id="agent1ZipCode" name="agent1ZipCode" placeholder="Zip Code">
               </div>
-              <div class="form-group form-inline">
+              <div class="form-group form-horizontal">
                 <label for="agent2Name">Agent2</label>
-                <input type="text" class="form-control" id="agent2Name" name="agent2Name" placeholder="Name">
                 <input type="number" class="form-control" id="agent2ZipCode" name="agent2ZipCode" placeholder="Zip Code">
               </div>
               <button type="submit" class="btn btn-default">Match</button>
             </form>
         </div>
-        <div class="col-md-7 well">
+        <div class="col-md-9 well">
             <h3> Contacts Distribution </h3>
             <div class="form-group">
               <label class="sr-only" for="distribution">Contacts distribution</label>
-              <textarea disabled class="form-control" rows="5" id="distribution">{{ $distribution }}
+              <textarea disabled class="form-control" rows="8" id="distribution">{{ $distribution }}
               </textarea>
             </div>
         </div>
