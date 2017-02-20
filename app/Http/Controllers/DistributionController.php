@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\DistanceCalculator;
+use App\Services\AgentsDistributor;
 
 use Illuminate\Support\Facades\Storage;
 
 class DistributionController extends Controller
 {
-    private $distanceCalculator;
+    private $distributor;
 
-    public function __construct(DistanceCalculator $calculator){
-        $this->distanceCalculator = $calculator;
+    public function __construct(AgentsDistributor $calculator){
+        $this->distributor = $calculator;
     }
 
     /**
@@ -37,8 +37,6 @@ class DistributionController extends Controller
     public function distribute(Request $request){
         $agents = array($request->agent1ZipCode,$request->agent2ZipCode);
         $distribution = json_encode($this->distributeContacts($agents,$this->getContacts()));
-        //$test= 
-        //    $this->distanceCalculator->zipCodesDistance($request->agent1ZipCode,$request->agent2ZipCode);
         return view('welcome', compact('distribution'));
     }
 
@@ -47,20 +45,7 @@ class DistributionController extends Controller
         return array_map('str_getcsv', str_getcsv($csv, "\n"));
     }
 
-    private function distributeContacts($agentsZipCodes, $contacts){
-        $result = [];
-        for( $i=0; $i<count($contacts); $i++ ){
-            $distances = [];
-            foreach($agentsZipCodes as &$zipCode){
-                $distances[] = $this->distanceCalculator->zipCodesDistance($contacts[$i][1],$zipCode);
-            }
-            $min_indexes = array_keys($distances, min($distances));
-            if(count($min_indexes) > 1){
-                $result[] = array(1,$contacts[$i][0],$contacts[$i][1]);
-            }else{
-                $result[] = array($min_indexes[0] + 1,$contacts[$i][0],$contacts[$i][1]);
-            }
-        }
-        return $result;
+    private function distributeContacts($agents,$contacts){
+        return $this->distributor->distributeContacts($agents,$contacts);
     }
 }

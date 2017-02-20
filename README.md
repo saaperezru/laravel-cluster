@@ -13,3 +13,11 @@ $ php artisan key:generate
 $ php artisan serve --host="0.0.0.0"
 ```
 Then go to http://127.0.0.1:8000 inside your browser.
+#Configuration
+You can configure two main components:
+ 1. The calculator of distance between zip codes (DistanceCalculator)
+ 2. The algorithm that distributes agents based on the distances (AgentsDistributor)
+To do so implement or choose your implementation of each interface and bind it at 
+```
+/app/Providers/AppServiceProvider.php
+```

@@ -24,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('App\Services\DistanceCalculator','App\Services\RemoteDistanceCalculator');
+        $this->app->bind('App\Services\AgentsDistributor','App\Services\BiasedAgentsDistributor');
     }
 }
