@@ -23,7 +23,9 @@ class DistributionController extends Controller
     */
     public function welcome(Request $request){
         return view('welcome', [
-            'distribution' => "Input the agent's Zip codes and click on the Match Button"
+            'distribution' => array(),
+            'agent1ZipCode' => "",
+            'agent2ZipCode' => ""
         ]);
     }
 
@@ -36,8 +38,12 @@ class DistributionController extends Controller
     */
     public function distribute(Request $request){
         $agents = array($request->agent1ZipCode,$request->agent2ZipCode);
-        $distribution = json_encode($this->distributeContacts($agents,$this->getContacts()));
-        return view('welcome', compact('distribution'));
+        $distribution = $this->distributeContacts($agents,$this->getContacts());
+        return view('welcome', [
+            'distribution' => $distribution,
+            'agent1ZipCode' => $agents[0],
+            'agent2ZipCode' => $agents[1]
+        ]);
     }
 
     private function getContacts(){

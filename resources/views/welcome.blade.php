@@ -19,6 +19,9 @@
                 height: 100vh;
                 margin: 0;
             }
+            .table--white{
+                background-color:white;
+            }
         </style>
 
     </head>
@@ -31,22 +34,39 @@
               {{ csrf_field() }}
               <div class="form-group form-horizontal">
                 <label for="agent1Name">Agent1</label>
-                <input type="number" class="form-control" id="agent1ZipCode" name="agent1ZipCode" placeholder="Zip Code">
+                <input type="number" class="form-control" id="agent1ZipCode" name="agent1ZipCode" placeholder="Zip Code" value="{{$agent1ZipCode}}">
               </div>
               <div class="form-group form-horizontal">
                 <label for="agent2Name">Agent2</label>
-                <input type="number" class="form-control" id="agent2ZipCode" name="agent2ZipCode" placeholder="Zip Code">
+                <input type="number" class="form-control" id="agent2ZipCode" name="agent2ZipCode" placeholder="Zip Code" value="{{$agent2ZipCode}}">
               </div>
               <button type="submit" class="btn btn-default">Match</button>
             </form>
         </div>
         <div class="col-md-9 well">
             <h3> Contacts Distribution </h3>
-            <div class="form-group">
-              <label class="sr-only" for="distribution">Contacts distribution</label>
-              <textarea disabled class="form-control" rows="8" id="distribution">{{ $distribution }}
-              </textarea>
-            </div>
+            <table class="table table-bordered table--white">
+                <thead>
+                    <tr>
+                        <th> Agent ID</th>
+                        <th> Contact name</th>
+                        <th> Contact zip code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($distribution as $row)
+                    <tr>
+                        <td> {{ $row[0] }} </td>
+                        <td> {{ $row[1] }} </td>
+                        <td> {{ $row[2] }} </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="100%" class="info">Input the agent's Zip codes and click on the Match Button</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
         </div>
     </body>

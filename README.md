@@ -8,6 +8,7 @@ $ docker run --rm -it --name app-container -p 8000:8000 -v $(pwd):/workspace app
 # su php
 $ composer install
 $ cp .env.example .env
+$ cp contacts.csv app/storage/
 $ mkdir bootstrap/cache
 $ php artisan config:clear
 $ php artisan key:generate
